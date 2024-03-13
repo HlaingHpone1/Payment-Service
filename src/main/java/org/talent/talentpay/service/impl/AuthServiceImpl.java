@@ -6,12 +6,16 @@ import jakarta.mail.Session;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.talent.talentpay.cache.OTP;
+import org.talent.talentpay.cache.OTPCache;
 import org.talent.talentpay.dao.UserDao;
+import org.talent.talentpay.domain.OTPValidateRequest;
 import org.talent.talentpay.entity.Users;
 import org.talent.talentpay.service.AuthService;
 import org.talent.talentpay.utility.EmailUtil;
 import org.talent.talentpay.constant.EmailConstant;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.Random;
@@ -45,7 +49,42 @@ public class AuthServiceImpl implements AuthService {
             System.out.println(r);
 
             send(mail, String.valueOf(r));
+
+            OTP otp = new OTP();
+            otp.setMail(mail);
+            otp.setOtp(Integer.toString(r));
+            otp.setExpiredTIme(LocalDateTime.now().plusMinutes(1));
+            OTPCache.saveOTP(otp);
         }
+    }
+
+    @Override
+    public boolean validateOTP(OTPValidateRequest request) {
+        boolean isValidate = false;
+
+        final OTP otp =OTPCache.getOTP(request.getMail());
+
+//        Validate otp correct
+//        if(otp.getOtp().equals(request.getOTP())){
+////            validate expire Time
+//
+//            if (LocalDateTime.now().isBefore(otp.getExpiredTIme())){
+//                isValidate = true;
+//            }
+//        }
+
+        if (otp != null){
+//        Validate otp correct
+            if(otp.getOtp().equals(request.getOTP())){
+//            validate expire Time
+
+                if (LocalDateTime.now().isBefore(otp.getExpiredTIme())){
+                    isValidate = true;
+                }
+            }
+        }
+
+        return isValidate;
     }
 
     private void send(String toEmail, String subject){
