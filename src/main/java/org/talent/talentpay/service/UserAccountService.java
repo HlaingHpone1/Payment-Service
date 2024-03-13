@@ -1,4 +1,4 @@
-package org.talent.telentpay.service;
+package org.talent.talentpay.service;
 
 public interface UserAccountService {
 }

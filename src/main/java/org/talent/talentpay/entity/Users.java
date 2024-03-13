@@ -1,4 +1,4 @@
-package org.talent.telentpay.entity;
+package org.talent.talentpay.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +23,7 @@ public class Users {
 
     private String userName;
     private String phoneNumber;
+    private String mail;
     private String address;
     private String NRC;
     private String profileImage;

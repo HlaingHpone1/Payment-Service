@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.talent</groupId>
-    <artifactId>telent-pay</artifactId>
+    <artifactId>talent-pay</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>payment</name>
     <description>payment</description>
@@ -56,6 +56,10 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
     </dependencies>
 

@@ -1,4 +1,4 @@
-package org.talent.telentpay.entity;
+package org.talent.talentpay.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

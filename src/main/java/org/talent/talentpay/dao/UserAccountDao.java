@@ -1,4 +1,4 @@
-package org.talent.telentpay.dao;
+package org.talent.talentpay.dao;
 
 public interface UserAccountDao {
 }
